@@ -1,0 +1,415 @@
+/*
+ * ===================================================================
+ * ÍNDICE DE ESTILOS
+ * ===================================================================
+ *
+ * 1. Configurações Globais (Variáveis e Reset)
+ * 2. Estilo Base da Página (Body)
+ * 3. Estrutura e Layout (Container)
+ * 4. Tipografia (Títulos, Parágrafos, Links)
+ * 5. Componente: Formulário
+ * 6. Componente: Caixa de Resultado
+ * 7. Componentes Genéricos (Listas)
+ * 8. Componente: Card de Informação (Accordion)
+ * 9. Componente: Rodapé (Footer)
+*/
+
+/* 1. Configurações Globais (Variáveis e Reset)
+------------------------------------------------------------------- */
+:root {
+    --cor-primaria: #4f8ef7;
+    --cor-primaria-hover: #174ea6;
+    --cor-fundo: #e0eafc;
+    --cor-texto-principal: #333;
+    --cor-texto-secundario: #555;
+    --cor-titulos: #2a4d69;
+    --raio-borda: 8px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Estilo Base da Página (Body)
+------------------------------------------------------------------- */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo);
+    background-image: linear-gradient(to right, #e0eafc, #cfdef3);
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+/* 3. Estrutura e Layout (Container)
+------------------------------------------------------------------- */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 4. Tipografia (Títulos, Parágrafos, Links)
+------------------------------------------------------------------- */
+h1, h2, h3 {
+    color: var(--cor-titulos);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 2.25rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+p, li {
+    color: var(--cor-texto-secundario);
+    font-size: 1rem;
+}
+
+a {
+    color: var(--cor-primaria);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--cor-primaria-hover);
+    text-decoration: underline;
+}
+
+/* 5. Componente: Formulário
+------------------------------------------------------------------- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: -0.5rem;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: var(--raio-borda);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="number"]:focus-visible {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-primaria) 25%, transparent);
+}
+
+.botoes-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+button {
+    flex-grow: 1;
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: var(--raio-borda);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background: var(--cor-primaria-hover);
+    transform: translateY(-2px);
+}
+
+button[type="reset"] {
+    background-color: #777;
+}
+
+button[type="reset"]:hover {
+    background-color: #555;
+}
+
+/* 6. Componente: Caixa de Resultado
+------------------------------------------------------------------- */
+/* -- Estrutura e Animação -- */
+.resultado-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: var(--raio-borda);
+    box-shadow: 0 4px 15px color-mix(in srgb, var(--cor-titulos) 15%, transparent);
+    text-align: center;
+    margin-top: 2rem;
+    overflow: hidden;
+
+    /* Animação de entrada/saída */
+    opacity: 0;
+    transform: translateY(20px);
+    max-height: 0;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, max-height 0.5s ease, padding 0.4s ease;
+}
+
+.resultado-box.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+    padding: 2rem;
+}
+
+/* -- Conteúdo Interno -- */
+.resultado-box h2 {
+    font-size: 1.75rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.resultado-box #resultado {
+    font-size: 1.25rem;
+    color: var(--cor-texto-principal);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* UNIFICADO: Estilo base e transição da classificação */
+.resultado-box #classificacao {
+    font-size: 1.6rem;
+    font-weight: 700;
+    transition: color 0.4s ease;
+}
+
+/* -- Modificadores de Cor da Classificação -- */
+.cor-normal {
+    color: #28a745 !important;
+}
+.cor-atencao {
+    color: #ffc107 !important;
+}
+.cor-alerta {
+    color: #fd7e14 !important;
+}
+.cor-perigo {
+    color: #dc3545 !important;
+}
+
+/* 7. Componentes Genéricos (Listas)
+------------------------------------------------------------------- */
+ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+/* 8. Componente: Card de Informação (Accordion)
+------------------------------------------------------------------- */
+.card-info {
+    background-color: #fff;
+    border-radius: var(--raio-borda);
+    box-shadow: 0 4px 15px color-mix(in srgb, var(--cor-titulos) 10%, transparent);
+    margin-top: 1rem;
+    overflow: hidden; /* Garante que o conteúdo não vaze durante a animação */
+}
+
+.accordion-header {
+    /* Reset de botão e estilo do cabeçalho */
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    
+    /* Layout flex para alinhar título e ícone */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Garante que a fonte do título seja usada */
+    font-family: inherit;
+}
+
+.accordion-title {
+    /* Ajustes no H3 dentro do accordion */
+    font-size: 1.25rem; /* Um pouco menor para o contexto do card */
+    color: var(--cor-titulos);
+    margin: 0; /* Remove margens padrão do h3 */
+    text-align: left;
+}
+
+.accordion-header:hover .accordion-title {
+    color: var(--cor-primaria);
+}
+
+/* Estilo e animação do ícone de seta */
+.accordion-icon {
+    width: 12px;
+    height: 12px;
+    border-style: solid;
+    border-color: var(--cor-titulos);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    transform: rotate(45deg); /* Aponta para baixo (fechado) */
+    transition: transform 0.3s ease-in-out;
+}
+
+.accordion-header.active .accordion-icon {
+    transform: rotate(-135deg); /* Aponta para cima (aberto) */
+}
+
+/* Conteúdo que expande/contrai */
+.accordion-content {
+    /* Escondido por padrão com animação */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.3s ease;
+    
+    /* Estilo do texto interno */
+    padding: 0 1.5rem;
+    color: var(--cor-texto-secundario);
+}
+
+.accordion-content p {
+    padding-bottom: 1rem;
+}
+
+/* --- Estilos para o conteúdo expandido do Accordion --- */
+
+.classification-table-title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    color: var(--cor-titulos);
+    font-size: 1.1rem;
+}
+
+.imc-classification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.imc-classification-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.imc-classification-list li:last-child {
+    border-bottom: none;
+}
+
+.imc-classification-list span {
+    color: var(--cor-texto-principal);
+}
+
+.imc-classification-list strong {
+    font-weight: 600;
+    color: var(--cor-primaria);
+}
+
+/* Estilo para a caixa de aviso/disclaimer */
+.disclaimer-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: color-mix(in srgb, var(--cor-fundo) 50%, transparent);
+    border-left: 4px solid var(--cor-primaria);
+    border-radius: 0 var(--raio-borda) var(--raio-borda) 0;
+}
+
+.disclaimer-box p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto-secundario);
+}
+
+.disclaimer-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* 9. Componente: Rodapé (Footer)
+------------------------------------------------------------------- */
+.site-footer {
+    width: 100%;
+    padding: 2rem 1rem;
+    margin-top: 4rem; /* Empurra o rodapé para baixo */
+    border-top: 1px solid color-mix(in srgb, var(--cor-titulos) 20%, transparent);
+    background-color: transparent;
+}
+
+.footer-container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite quebrar a linha em telas pequenas */
+    gap: 1rem;
+}
+
+.footer-text {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    text-align: center;
+    flex-grow: 1; /* Permite que o texto cresça */
+}
+
+.footer-social {
+    display: flex;
+    gap: 1.5rem;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.footer-social a {
+    color: var(--cor-texto-secundario);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--cor-primaria);
+    transform: scale(1.1) translateY(-2px);
+}
+
+/* Ajuste para telas menores */
+@media (min-width: 600px) {
+    .footer-text {
+        text-align: left;
+        flex-grow: 0; /* Não cresce tanto em telas maiores */
+    }
+    .footer-social {
+        justify-content: flex-end;
+        flex-grow: 0;
+    }
+}
